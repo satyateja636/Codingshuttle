@@ -10,19 +10,20 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.example.springwebtutorial.dto.EmployeeDTO;
 //import com.example.springwebtutorial.dto.EmployeeDTO;
 import com.example.springwebtutorial.entities.EmployeeEntity;
-import com.example.springwebtutorial.repositories.EmployeeRepository;
+import com.example.springwebtutorial.services.EmployeeService;
 
 @RestController
 @RequestMapping("/employees")
 public class EmployeeController {
 
 	
-	private final EmployeeRepository employeeRepository;
+	private final EmployeeService employeeService;
 	
-	public EmployeeController(EmployeeRepository employeeRepository) {
-		this.employeeRepository = employeeRepository;
+	public EmployeeController(EmployeeService employeeService) {
+		this.employeeService = employeeService;
 	}
 	
 	@GetMapping(path = "/getSecretMessage")
@@ -37,18 +38,18 @@ public class EmployeeController {
 	
 	
 	@GetMapping("/{employeeId}")
-	public EmployeeEntity getEmployee(@PathVariable(name = "employeeId") Long id) {
-		return employeeRepository.findById(id).orElse(null);
+	public EmployeeDTO getEmployeeById(@PathVariable(name = "employeeId") Long id) {
+		return employeeService.getEmployeeById(id);
 	}
 	  
 	@GetMapping
-	public List<EmployeeEntity> getAllEmployees(){
-		return employeeRepository.findAll();
+	public List<EmployeeDTO> getAllEmployees(){
+		return employeeService.getAllEmployees()  ;
 	}
 	
 	@PostMapping
-	public EmployeeEntity createNewEmployee(@RequestBody EmployeeEntity inputEmployee) {
-		return employeeRepository.save(inputEmployee);
+	public EmployeeDTO createNewEmployee(@RequestBody EmployeeEntity inputEmployee) {
+		return employeeService.createNewEmployee(inputEmployee);
 	}
 	
 //	@PostMapping
