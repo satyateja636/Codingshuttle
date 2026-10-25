@@ -2,6 +2,8 @@ package com.example.springwebtutorial.dto;
 
 import java.time.LocalDate;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 public class EmployeeDTO {
 
 	private Long id;
@@ -9,6 +11,7 @@ public class EmployeeDTO {
 	private String email;
 	private Integer age;
 	private LocalDate dateOfJoining;
+	@JsonProperty("isActive")
 	private Boolean isActive;
 	
 	
