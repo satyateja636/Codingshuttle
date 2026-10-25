@@ -40,8 +40,8 @@ public class EmployeeService {
 		return employeeEntities.stream().map(employeeEntity -> modelMapper.map(employeeEntity, EmployeeDTO.class)).collect(Collectors.toList());
 	}
 	
-	public EmployeeDTO createNewEmployee(@RequestBody EmployeeEntity inputEmployee) {
-		EmployeeEntity employeeEntity =  employeeRepository.save(inputEmployee);
+	public EmployeeDTO createNewEmployee(@RequestBody EmployeeDTO inputEmployee) {
+		EmployeeEntity employeeEntity =  employeeRepository.save(modelMapper.map(inputEmployee, EmployeeEntity.class));
 		return modelMapper.map(employeeEntity, EmployeeDTO.class);
 	}
 

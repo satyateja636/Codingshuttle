@@ -18,9 +18,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.springwebtutorial.dto.EmployeeDTO;
-//import com.example.springwebtutorial.dto.EmployeeDTO;
-import com.example.springwebtutorial.entities.EmployeeEntity;
 import com.example.springwebtutorial.services.EmployeeService;
+
+import jakarta.validation.Valid;
 
 @RestController
 @RequestMapping("/employees")
@@ -57,7 +57,7 @@ public class EmployeeController {
 	}
 	
 	@PostMapping
-	public ResponseEntity<EmployeeDTO> createNewEmployee(@RequestBody EmployeeEntity inputEmployee) {
+	public ResponseEntity<EmployeeDTO> createNewEmployee(@RequestBody @Valid EmployeeDTO inputEmployee) {
 		EmployeeDTO savedEmployee = employeeService.createNewEmployee(inputEmployee);
 		return new ResponseEntity<>(savedEmployee, HttpStatus.CREATED);
 	}

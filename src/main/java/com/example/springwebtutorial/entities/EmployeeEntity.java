@@ -28,6 +28,8 @@ public class EmployeeEntity {
 	private LocalDate dateOfJoining;
 	@JsonProperty("isActive")
 	private Boolean isActive;
+	private String role;
+	private Double salary;
 	
 	
 	public Long getId() {
@@ -66,7 +68,19 @@ public class EmployeeEntity {
 	public void setIsActive(Boolean isActive) {
 		this.isActive = isActive;
 	}
-	public EmployeeEntity(Long id, String name, String email, Integer age, LocalDate dateOfJoining, Boolean isActive) {
+	public String getRole() {
+		return role;
+	}
+	public void setRole(String role) {
+		this.role = role;
+	}
+	public Double getSalary() {
+		return salary;
+	}
+	public void setSalary(Double salary) {
+		this.salary = salary;
+	}
+	public EmployeeEntity(Long id, String name, String email, Integer age, LocalDate dateOfJoining, Boolean isActive, String role, Double salary) {
 		super();
 		this.id = id;
 		this.name = name;
@@ -74,6 +88,8 @@ public class EmployeeEntity {
 		this.age = age;
 		this.dateOfJoining = dateOfJoining;
 		this.isActive = isActive;
+		this.role = role;
+		this.salary = salary;
 	}
 	public EmployeeEntity() {
 		super();
