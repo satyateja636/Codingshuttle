@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.springwebtutorial.dto.EmployeeDTO;
+import com.example.springwebtutorial.exceptions.ResourceNotFoundException;
 import com.example.springwebtutorial.services.EmployeeService;
 
 import jakarta.validation.Valid;
@@ -45,10 +46,10 @@ public class EmployeeController {
 	
 	
 	@GetMapping("/{employeeId}")
-	public ResponseEntity<Optional<EmployeeDTO>> getEmployeeById(@PathVariable(name = "employeeId") Long id) {
+	public ResponseEntity<EmployeeDTO> getEmployeeById(@PathVariable(name = "employeeId") Long id) {
 		Optional<EmployeeDTO> employeeDTO = employeeService.getEmployeeById(id);
 		if(employeeDTO == null) return ResponseEntity.notFound().build();
-		return employeeDTO.map(employeeDTO1 -> ResponseEntity.ok(employeeDTO)).orElse(ResponseEntity.notFound().build());
+		return employeeDTO.map(employeeDTO1 -> ResponseEntity.ok(employeeDTO1)).orElseThrow(() -> new ResourceNotFoundException("Employee not found"));
 	}
 	  
 	@GetMapping
